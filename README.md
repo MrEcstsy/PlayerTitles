@@ -1,5 +1,8 @@
 # PlayerTitles Plugin
-
+[![](https://poggit.pmmp.io/shield.state/PlayerTitles)](https://poggit.pmmp.io/p/PlayerTitles)
+<a href="https://poggit.pmmp.io/p/PlayerTitles"><img src="https://poggit.pmmp.io/shield.state/PlayerTitles"></a>
+[![](https://poggit.pmmp.io/shield.api/PlayerTitles)](https://poggit.pmmp.io/p/PlayerTitles)
+<a href="https://poggit.pmmp.io/p/PlayerTitles"><img src="https://poggit.pmmp.io/shield.api/PlayerTitles"></a>
 ## Overview
 
 The PlayerTitles plugin for PocketMine-MP allows players to view and manage their titles through a user-friendly UI. Server admins can create new titles either through the configuration file or by using in-game commands. Each player's currently equipped title is stored in an SQLite database, ensuring persistent title management.
