@@ -6,7 +6,11 @@ use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\BaseCommand;
 use ecstsy\PlayerTitles\Utils\Utils;
 use pocketmine\command\CommandSender;
+use pocketmine\lang\Translatable;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat as C;
+use pocketmine\world\sound\FizzSound;
+use pocketmine\world\sound\XpLevelUpSound;
 
 class CreateTitlesCommand extends BaseCommand {
 
@@ -27,6 +31,10 @@ class CreateTitlesCommand extends BaseCommand {
             $titles = $config->get("titles", []);
             if (isset($titles[$identifier])) {
                 $sender->sendMessage(C::colorize("&r&c&l(!) &r&cTitle identifier '&4$identifier&c' already exists."));
+
+                if ($sender instanceof Player) {
+                    $sender->getWorld()->addSound($sender->getPosition()->asVector3(), new FizzSound(100));
+                }
                 return;
             }
 
@@ -38,10 +46,18 @@ class CreateTitlesCommand extends BaseCommand {
             $config->save();
 
             $sender->sendMessage(C::colorize("&r&a&l(!) &r&aTitle '$identifier' with display '$display&r&a' has been added successfully."));
+            
+            if ($sender instanceof Player) {
+                $sender->getWorld()->addSound($sender->getPosition()->asVector3(), new XpLevelUpSound(10000));
+            }
         } else {
-            $sender->sendMessage("Usage: /createTitle <identifier> <display>");
-
+            $sender->sendMessage($this->getUsage());
         } 
+    }
+
+    public function getUsage(): Translatable|string
+    {
+        return "&r&cUsage: /createtitle <identifier> <display>";
     }
 
     public function getPermission(): string {
