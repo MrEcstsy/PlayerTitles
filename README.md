@@ -70,3 +70,6 @@ forms:
     name: "&r&8Titles"
     back: "&r&8Previous Page"
     next: "&r&8Next Page"
+```
+## Icon
+<a href="https://www.flaticon.com/free-icons/title" title="title icons">Title icons created by Akalidz - Flaticon</a>
