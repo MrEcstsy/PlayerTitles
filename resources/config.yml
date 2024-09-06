@@ -1,0 +1,41 @@
+# (!) DO NOT CHANGE (!)
+version: 1
+
+# (!) NOTICE (!)
+# You can use '&' for color codes.
+# use {title} in RankSystems config.yml to replace it with player's title
+# e.g: "{chat_ranks_prefix}{chat_name-color}{display_name}{title}{chat_format}{message}"
+#
+# Permissions will be automatically applied. e.g:
+# playertitles.title.example
+
+# Configurable information for the plugin.
+settings:
+  titles-per-page: 5 # How many titles to show per page
+  message:
+    - "&r&aSelected Title: '{title}&a'"
+  no-title-perm: "&r&cYou don't have access to this title!"
+
+titles:
+  example: # Identifier 
+    display: "&r&8[&cExample&8]&r"
+  test:
+    display: "&r&5Test&r"
+
+# If the command exists, e.g "titles", the plugin will automatically unregister the vanilla command.
+# IF renaming it to a vanilla command, make sure you wont need to use the command as it will no longer be available unless the
+# command name is changed.
+commands:
+  titles:
+    name: "title" # Main command
+    description: "Open titles menu"
+    aliases:
+      - titles
+
+# Configurable information for the forms available by the plugin.
+forms:
+  titles:
+    name: "&r&8Titles"
+    back: "&r&8Previous Page"
+    next: "&r&8Next Page"
+    
