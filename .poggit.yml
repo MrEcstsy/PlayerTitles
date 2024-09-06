@@ -1,0 +1,21 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/MrEcstsy/PlayerTitles
+build-by-default: true
+branches:
+- main
+projects:
+  PlayerTitles:
+    path: ""
+    libs:
+      - src: "Paroxity/Commando/Commando"
+        version: "^3.2.0"
+      - src: "muqsit/simplepackethandler/SimplePacketHandler"
+        branch: pm5
+        version: "^0.1.4"
+      - src: Vecnavium/FormsUI/libFormsUI
+        version: ^2.0.0
+      - src: ifera-mc/ConfigUpdater/ConfigUpdater
+        version: ^2.1.0
+      - src: poggit/libasynql/libasynql
+        version: ^4.1.6
+
+...
