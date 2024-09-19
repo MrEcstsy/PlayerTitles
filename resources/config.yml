@@ -1,5 +1,5 @@
 # (!) DO NOT CHANGE (!)
-version: 1
+version: 2
 
 # (!) NOTICE (!)
 # You can use '&' for color codes.
@@ -15,6 +15,16 @@ settings:
   message:
     - "&r&aSelected Title: '{title}&a'"
   no-title-perm: "&r&cYou don't have access to this title!"
+  # Both the name and lore support the {title} placeholder.
+  item:
+    type: "paper"
+    name: "&r&l&eTITLE '&r&f{title}&l&e'&r"
+    lore: 
+      - "&r&7Right Click (in your hand) to unlock"
+      - "&r&7the &f{title} &7on this server."
+    title-type: "display" # Either "display" or "identifier", this will show the titles identifier, or the display (Identifier will autocapitalize the first letter)
+  claim-message: "&r&aYou have unlocked the '&f{title}&a' title!"
+  claim-sound: "random.levelup"
 
 titles:
   example: # Identifier 
