@@ -24,7 +24,7 @@ The PlayerTitles plugin for PocketMine-MP allows players to view and manage thei
 
 The plugin uses a `config.yml` file for configuration. You can define titles and their display formats in this file. Example configuration:
 
-```yaml
+```yml
 # (!) DO NOT CHANGE (!)
 version: 2
 
