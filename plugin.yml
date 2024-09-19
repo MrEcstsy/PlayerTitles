@@ -10,4 +10,6 @@ permissions:
   playertitles.command:
     default: true
   playertitles.command.create:
-    default: op 
+    default: op
+  playertitles.command.give:
+    default: op
