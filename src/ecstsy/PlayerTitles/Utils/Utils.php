@@ -3,6 +3,10 @@
 namespace ecstsy\PlayerTitles\Utils;
 
 use ecstsy\PlayerTitles\Loader;
+use pocketmine\entity\Entity;
+use pocketmine\item\Item;
+use pocketmine\item\StringToItemParser;
+use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use pocketmine\utils\Config;
@@ -91,4 +95,63 @@ class Utils {
         return $found;
     }
 
+    /**
+     * @param Entity $player
+     * @param string $sound
+     * @param int $volume
+     * @param int $pitch
+     * @param int $radius
+     */
+    public static function playSound(Entity $player, string $sound, $volume = 1, $pitch = 1, int $radius = 5): void
+    {
+        foreach ($player->getWorld()->getNearbyEntities($player->getBoundingBox()->expandedCopy($radius, $radius, $radius)) as $p) {
+            if ($p instanceof Player) {
+                if ($p->isOnline()) {
+                    $spk = new PlaySoundPacket();
+                    $spk->soundName = $sound;
+                    $spk->x = $p->getLocation()->getX();
+                    $spk->y = $p->getLocation()->getY();
+                    $spk->z = $p->getLocation()->getZ();
+                    $spk->volume = $volume;
+                    $spk->pitch = $pitch;
+                    $p->getNetworkSession()->sendDataPacket($spk);
+                }
+            }
+        }
+    }
+     
+    public static function createPlayerTitle(string $title, int $amount = 1): Item {
+        $config = self::getConfiguration("config.yml")->getAll();
+    
+        if (!isset($config["titles"][$title])) {
+            throw new \InvalidArgumentException("Title '$title' does not exist.");
+        }
+    
+        $titleSettings = $config["titles"][$title];
+        $itemType = $config["settings"]['item']['type'] ?? "minecraft:paper"; // Default to paper if type not set
+        $itemName = $config["settings"]['item']['name'] ?? "&r&l&b* &r&bPlayer Title &r&l*&r";
+        $itemLore = $config["settings"]['item']['lore'] ?? [
+            "&r&7Unlocks a special player title.",
+            "&r&7Redeem to gain {title}."
+        ];
+    
+        $item = StringToItemParser::getInstance()->parse($itemType)->setCount($amount);
+        if ($item === null) {
+            throw new \InvalidArgumentException("Invalid item type '$itemType'.");
+        }
+    
+        $titleType = $config["settings"]["item"]["title-type"] ?? "display";
+        $titleValue = ($titleType === "identifier")
+            ? ucfirst($title)
+            : ($titleSettings['display'] ?? ucfirst($title)); 
+    
+        $finalName = str_replace("{title}", $titleValue, $itemName);
+        $finalLore = array_map(fn($line) => str_replace("{title}", $titleValue, $line), $itemLore);
+    
+        $item->setCustomName(C::colorize($finalName));
+        $item->setLore(array_map([C::class, "colorize"], $finalLore));
+    
+        $item->getNamedTag()->setString("player_title", $title);
+        return $item;
+    }
 }
