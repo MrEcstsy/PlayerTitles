@@ -11,21 +11,18 @@ use ecstsy\PlayerTitles\Utils\Utils;
 use IvanCraft623\RankSystem\RankSystem;
 use IvanCraft623\RankSystem\session\Session;
 use IvanCraft623\RankSystem\tag\Tag;
-use JackMD\ConfigUpdater\ConfigUpdater;
+use ecstsy\PlayerTitles\libs\JackMD\ConfigUpdater\ConfigUpdater;
 use pocketmine\command\defaults\VanillaCommand;
-use pocketmine\permission\Permission;
-use pocketmine\permission\PermissionManager;
 use pocketmine\plugin\PluginBase;
-use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
-use poggit\libasynql\DataConnector;
-use poggit\libasynql\libasynql;
+use ecstsy\PlayerTitles\libs\poggit\libasynql\DataConnector;
+use ecstsy\PlayerTitles\libs\poggit\libasynql\libasynql;
 
 class Loader extends PluginBase {
 
     use SingletonTrait;
 
-    public int $configVer = 1;
+    public int $configVer = 2;
     
     public static DataConnector $connector;
 
