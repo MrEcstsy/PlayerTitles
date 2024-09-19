@@ -1,7 +1,7 @@
 name: PlayerTitles
 main: ecstsy\PlayerTitles\Loader
 api: 5.3.0
-version: 1.0.0
+version: 1.1.0
 author: ecstsy
 depend:
   - RankSystem
