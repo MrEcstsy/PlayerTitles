@@ -3,6 +3,7 @@
 namespace ecstsy\PlayerTitles;
 
 use ecstsy\PlayerTitles\Commands\CreateTitlesCommand;
+use ecstsy\PlayerTitles\Commands\GiveTitleCommand;
 use ecstsy\PlayerTitles\Commands\TitlesCommand;
 use ecstsy\PlayerTitles\Listeners\EventListener;
 use ecstsy\PlayerTitles\Player\PlayerManager;
@@ -64,7 +65,9 @@ class Loader extends PluginBase {
 
         $this->getServer()->getCommandMap()->registerAll("PlayerTitles", [
             new TitlesCommand($this, $config->getNested("commands.titles.name"), $config->getNested("commands.titles.description"), $config->getNested("commands.titles.aliases")),
-            new CreateTitlesCommand($this, "createtitle", "Create a new title", ["ctitle"])
+            new CreateTitlesCommand($this, "createtitle", "Create a new title", ["ctitle"]),
+            new GiveTitleCommand($this, "givetitle", "Give player a title")
+
         ]);
         
     }
